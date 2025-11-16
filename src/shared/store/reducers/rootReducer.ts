@@ -6,9 +6,9 @@ import { authApi } from '../api/authApi';
 import { productsApi } from '../api/productsApi';
 
 export const rootReducer = combineReducers({
-	[userSlice.name]: userSlice.reducer,
-	[cartSlice.name]: cartSlice.reducer,
-	[productsSlice.name]: productsSlice.reducer,
-	[authApi.reducerPath]: authApi.reducer,
-	[productsApi.reducerPath]: productsApi.reducer,
+  [userSlice.name]: userSlice.reducer,
+  [cartSlice.name]: cartSlice.reducer,
+  [productsSlice.name]: productsSlice.reducer,
+  [authApi.reducerPath]: authApi.reducer,
+  [productsApi.reducerPath]: productsApi.reducer,
 });
