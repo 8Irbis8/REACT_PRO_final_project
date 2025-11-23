@@ -1,8 +1,8 @@
-import { WithProtection } from '../../../shared/store/HOCs/WithProtection';
-import { WithQuery } from '../../../shared/store/HOCs/WithQuery';
-import { LoadMore } from '../../../shared/ui/LoadMore';
-import { CardList } from '../../../widgets/CardList';
-import { useProducts } from '../../../shared/store/hooks/useProducts';
+import { InfiniteScroll } from '@/features/infinite-scroll/ui/InfiniteScroll';
+import { WithProtection } from '@/shared/store/HOCs/WithProtection';
+import { WithQuery } from '@/shared/store/HOCs/WithQuery';
+import { useProducts } from '@/shared/store/hooks/useProducts';
+import { CardList } from '@/widgets/CardList';
 
 const CardListWithQuery = WithQuery(CardList);
 
@@ -18,7 +18,7 @@ export const HomePage = WithProtection(() => {
         products={products}
         error={error}
       />
-      <LoadMore />
+      <InfiniteScroll />
     </>
   );
 });

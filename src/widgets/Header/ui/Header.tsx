@@ -1,20 +1,21 @@
+import { Search } from '@/entities/search';
+import { useProducts } from '@/shared/store/hooks/useProducts';
+import { cartSelectors } from '@/shared/store/slices/cart';
+import { userSelectors } from '@/shared/store/slices/user';
+import { useAppSelector } from '@/shared/store/utils';
+import { Logo } from '@/shared/ui/Logo';
+import { isLiked } from '@/shared/utils';
 import classNames from 'classnames';
-import s from './Header.module.css';
-import { Logo } from '../../../shared/ui/Logo';
-import { Search } from '../../../shared/ui/Search/ui/Search';
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../../shared/store/utils';
-import { userSelectors } from '../../../shared/store/slices/user';
-import { isLiked } from '../../../shared/utils';
-import { useProducts } from '../../../shared/store/hooks/useProducts';
-import { cartSelectors } from '../../../shared/store/slices/cart';
+import s from './Header.module.css';
 
-export const Header = () => {
+export const Header = memo(() => {
   const { products } = useProducts();
   const user = useAppSelector(userSelectors.getUser);
   const cartProducts = useAppSelector(cartSelectors.getCartProducts);
 
-  const likeCount = products.filter((product) => isLiked(product.likes, user?.id)).length;
+  const likeCount = products.filter((product: Product) => isLiked(product.likes, user?.id)).length;
 
   const accessToken = useAppSelector(userSelectors.getAccessToken);
 
@@ -77,4 +78,6 @@ export const Header = () => {
       </div>
     </header>
   );
-};
+});
+
+Header.displayName = 'Header';

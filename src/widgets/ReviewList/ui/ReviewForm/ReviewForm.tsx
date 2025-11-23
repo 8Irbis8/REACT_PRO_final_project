@@ -1,19 +1,20 @@
-import { useState, ChangeEvent } from 'react';
+import { Button } from '@/shared/ui/Button';
+import { Rating } from '@/shared/ui/Rating';
 import classNames from 'classnames';
+import { ChangeEvent, useCallback, useState } from 'react';
 import s from './ReviewForm.module.css';
-import { Rating } from '../../../../shared/ui/Rating';
 
 export const ReviewForm = () => {
   const [reviewText, setReviewText] = useState('');
   const [rating, setRating] = useState(0);
 
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
     setReviewText(e.target.value);
-  };
+  }, []);
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     console.log('Отправка: ', { reviewText, rating });
-  };
+  }, [reviewText, rating]);
 
   return (
     <form className={s['form']}>
@@ -26,13 +27,13 @@ export const ReviewForm = () => {
         value={reviewText}
         onChange={handleChange}
       ></textarea>
-      <button
+      <Button
         type="submit"
         className={classNames(s['form__btn'], s['pramary'])}
         onClick={handleClick}
       >
         Отправить отзыв
-      </button>
+      </Button>
     </form>
   );
 };
