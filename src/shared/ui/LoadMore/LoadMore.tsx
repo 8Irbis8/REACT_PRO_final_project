@@ -2,7 +2,7 @@ import { Alert, CircularProgress, Stack } from '@mui/material';
 import { RefObject } from 'react';
 
 type LoadMoreProps = {
-  ref: RefObject<HTMLDivElement>;
+  ref: RefObject<HTMLDivElement | null>;
   isEndOfList: boolean;
   isFetching: boolean;
   endOfListText?: string;

@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '@shared/store/utils';
 import { RefObject, useCallback, useLayoutEffect } from 'react';
 
 interface UseInfiniteScrollParams {
-  ref: RefObject<HTMLDivElement>;
+  ref: RefObject<HTMLDivElement | null>;
 }
 
 export const useInfiniteScroll = ({ ref }: UseInfiniteScrollParams) => {

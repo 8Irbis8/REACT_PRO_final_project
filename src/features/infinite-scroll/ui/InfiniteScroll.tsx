@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { useInfiniteScroll } from '../model/hooks/useInfiniteScroll';
 
 export const InfiniteScroll = () => {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const { isEndOfList, isFetching } = useInfiniteScroll({ ref });
 
   return (
