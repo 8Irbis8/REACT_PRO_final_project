@@ -1,7 +1,7 @@
+import { CartCounter } from '@/entities/counter/cartCounter';
 import TrashIcon from '@shared/assets/icons/trash.svg?react';
 import { cartActions } from '@shared/store/slices/cart';
 import { Button } from '@shared/ui/Button';
-import { CartCounter } from '@shared/ui/CartCounter';
 import { Price } from '@shared/ui/Price';
 import classNames from 'classnames';
 import { useCallback } from 'react';

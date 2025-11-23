@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "vite ",
+    "start": "vite",
     "build": "tsc && vite build",
     "build: webpack": "cross-env NODE_ENV=production webpack --config webpack/webpack.config.js --env env=prod",
     "start: webpack": "webpack serve --config webpack/webpack.config.js --env env=dev",

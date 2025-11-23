@@ -1,8 +1,8 @@
+import { CartCounter } from '@/entities/counter/cartCounter';
+import { ProductCartCounter } from '@/entities/counter/productCartCounter';
 import { cartSelectors } from '@shared/store/slices/cart';
 import { useAppSelector } from '@shared/store/utils';
-import { CartCounter } from '@shared/ui/CartCounter';
 import { Price } from '@shared/ui/Price';
-import { ProductCartCounter } from '@shared/ui/ProductCartCounter/ui/ProductCartCounter';
 import classNames from 'classnames';
 import { memo } from 'react';
 import { ProductLikeButton } from '../../LikeButton';

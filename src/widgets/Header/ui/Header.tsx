@@ -1,3 +1,4 @@
+import { Search } from '@/entities/search';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { useProducts } from '../../../shared/store/hooks/useProducts';
@@ -5,7 +6,6 @@ import { cartSelectors } from '../../../shared/store/slices/cart';
 import { userSelectors } from '../../../shared/store/slices/user';
 import { useAppSelector } from '../../../shared/store/utils';
 import { Logo } from '../../../shared/ui/Logo';
-import { Search } from '../../../shared/ui/Search/ui/Search';
 import { isLiked } from '../../../shared/utils';
 import s from './Header.module.css';
 
