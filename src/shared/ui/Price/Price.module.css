@@ -1,0 +1,52 @@
+.price-wrap {
+  position: relative;
+  padding-top: 1.2em;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.price {
+  font-size: 1.75em;
+  line-height: 1.14;
+  font-weight: 800;
+  display: block;
+}
+
+.price_old {
+  font-size: 0.875em;
+  font-weight: 400;
+  line-height: 1.42;
+  text-decoration: line-through;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-weight: 600;
+}
+
+.price_discount {
+  color: #f44336;
+}
+
+.price-big {
+  font-size: 16px;
+}
+
+.price-small {
+  font-size: 14px;
+}
+
+.price_medium {
+  font-size: 15px;
+}
+
+.price_left {
+  left: 0;
+  right: auto;
+}
+
+.price_right {
+  left: auto;
+  right: 0;
+}
