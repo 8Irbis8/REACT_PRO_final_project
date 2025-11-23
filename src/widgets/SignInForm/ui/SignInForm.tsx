@@ -7,6 +7,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import { getMessageFromError } from '@/shared/utils';
 import { useDispatch } from 'react-redux';
 import { useSignInMutation } from '../../../shared/store/api/authApi';
 import { userActions } from '../../../shared/store/slices/user';
@@ -39,29 +40,29 @@ export const SignInForm: FC = () => {
   });
 
   const submitHandler: SubmitHandler<SignInFormValues> = async (values) => {
-    // try {
-    // метод "unwrap" помогает убрать вспомогательные обертки
-    // RTK, которые обрабатывают ошибки. Теперь ошибки обрабатываем мы
-    // с помощью конструкции try...catch. В этом случае нам так удобней
-    const response = await signInRequestFn(values).unwrap();
+    try {
+      // метод "unwrap" помогает убрать вспомогательные обертки
+      // RTK, которые обрабатывают ошибки. Теперь ошибки обрабатываем мы
+      // с помощью конструкции try...catch. В этом случае нам так удобней
+      const response = await signInRequestFn(values).unwrap();
 
-    dispatch(userActions.setUser(response.user));
-    dispatch(userActions.setAccessToken({ accessToken: response.accessToken }));
+      dispatch(userActions.setUser(response.user));
+      dispatch(userActions.setAccessToken({ accessToken: response.accessToken }));
 
-    // Выводим уведомление, что пользователь успешно зарегался
-    // Есть куча библиотек для отображения "Тостеров". Мы используем
-    // react-toastify — https://github.com/fkhadra/react-toastify#readme
-    toast.success('Вы успешно авторизованы!');
+      // Выводим уведомление, что пользователь успешно зарегался
+      // Есть куча библиотек для отображения "Тостеров". Мы используем
+      // react-toastify — https://github.com/fkhadra/react-toastify#readme
+      toast.success('Вы успешно авторизованы!');
 
-    if (location.state?.from) {
-      return navigate(location.state.from);
+      if (location.state?.from) {
+        return navigate(location.state.from);
+      }
+
+      navigate('/');
+    } catch (error) {
+      // Если произошла ошибка, то выводим уведомление
+      toast.error(getMessageFromError(error, 'Не известная ошибка при авторизации пользователя'));
     }
-
-    navigate('/');
-    // } catch (error) {
-    //   // Если произошла ошибка, то выводим уведомление
-    //   toast.error(getMessageFromError(error, 'Не известная ошибка при авторизации пользователя'));
-    // }
   };
 
   return (
