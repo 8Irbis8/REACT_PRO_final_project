@@ -1,8 +1,9 @@
 import { productsActions, productsSelectors } from '@/shared/store/slices/products';
 import { useAppDispatch, useAppSelector } from '@shared/store/utils';
 import { Sort } from '@shared/ui/Sort';
+import { memo } from 'react';
 
-export const Filter = () => {
+export const Filter = memo(() => {
   const dispatch = useAppDispatch();
   const sort = useAppSelector(productsSelectors.getSort);
 
@@ -18,4 +19,6 @@ export const Filter = () => {
   ];
 
   return <Sort value={sort} options={sortOptions} onChange={setSort} />;
-};
+});
+
+Filter.displayName = 'Filter';

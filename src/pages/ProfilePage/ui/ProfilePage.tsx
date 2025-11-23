@@ -1,6 +1,7 @@
 import { WithProtection } from '@/shared/store/HOCs/WithProtection';
 import { Button } from '@/shared/ui/Button';
 import { ButtonBack } from '@/shared/ui/ButtonBack';
+
 import { Input } from '@/shared/ui/Input';
 import classNames from 'classnames';
 import s from './ProfilePage.module.css';

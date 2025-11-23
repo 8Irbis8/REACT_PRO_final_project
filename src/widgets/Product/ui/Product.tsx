@@ -6,12 +6,13 @@ import { useGetProductQuery } from '@/shared/store/api/product';
 import QualitySVG from '@shared/assets/icons/quality.svg?react';
 import TruckSVG from '@shared/assets/icons/truck.svg?react';
 import { ReviewList } from '@widgets/ReviewList/ui/ReviewList';
+import { memo } from 'react';
 
 type TProductProps = {
   productId: string;
 };
 
-export const Product = ({ productId }: TProductProps) => {
+export const Product = memo(({ productId }: TProductProps) => {
   const { data: product } = useGetProductQuery({ id: productId });
 
   if (!product) {
@@ -41,4 +42,6 @@ export const Product = ({ productId }: TProductProps) => {
       <ReviewList product={product} />
     </>
   );
-};
+});
+
+Product.displayName = 'Product';
