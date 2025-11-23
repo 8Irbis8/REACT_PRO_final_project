@@ -4,7 +4,7 @@ import { Counter } from '@/shared/ui/Counter';
 import classNames from 'classnames';
 import { useCallback, useMemo } from 'react';
 import { useProductCount } from '../model/hooks/useCount';
-import './Product.module.css';
+import './ProductCartCounter.module.css';
 
 type ProductCounterProps = {
   product: Product;
@@ -16,7 +16,7 @@ export const ProductCartCounter = ({ product }: ProductCounterProps) => {
 
   const addProductToCartCallback = useCallback(
     () => addProductToCart({ ...product, count }),
-    [product, count],
+    [product, count, addProductToCart],
   );
 
   const toCartButtonMemo = useMemo(

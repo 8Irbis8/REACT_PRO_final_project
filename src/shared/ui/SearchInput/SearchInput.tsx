@@ -1,4 +1,4 @@
-import s from './Search.module.css';
+import s from './SearchInput.module.css';
 
 type SearchProps = {
   value: string;
