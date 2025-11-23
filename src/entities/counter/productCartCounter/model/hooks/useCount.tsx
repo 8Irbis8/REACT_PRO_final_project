@@ -7,8 +7,8 @@ const MAX_COUNT = 99;
 export const useProductCount = () => {
   const [count, setCount] = useState(1);
   const previousCount = usePreviousValue(count);
-  console.log(previousCount)
-  
+  console.log(previousCount);
+
   const handleCount = (e: ChangeEvent<HTMLInputElement>) => {
     const newCount = +e.target.value;
     const validCount =
