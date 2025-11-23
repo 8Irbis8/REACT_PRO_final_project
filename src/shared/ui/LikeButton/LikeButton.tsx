@@ -1,6 +1,7 @@
 import LikeSvg from '@shared/assets/icons/like.svg?react';
 import classNames from 'classnames';
 import { memo } from 'react';
+import { Button } from '../Button';
 import s from './LikeButton.module.css';
 
 type TLikeButtonProps = {
@@ -13,7 +14,7 @@ type TLikeButtonProps = {
 export const LikeButton = memo(
   ({ isActive = false, onClick, disabled = false, className }: TLikeButtonProps) => {
     return (
-      <button
+      <Button
         className={classNames(s['card__favorite'], className, {
           [s['card__favorite_is-active']]: isActive,
           [s['card__favorite_disabled']]: disabled,
@@ -23,7 +24,7 @@ export const LikeButton = memo(
         type="button"
       >
         <LikeSvg />
-      </button>
+      </Button>
     );
   },
 );

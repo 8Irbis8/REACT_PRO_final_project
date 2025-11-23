@@ -1,8 +1,8 @@
+import { CartAmount } from '@/features/cart/CartAmount';
+import { cartSelectors } from '@/shared/store/slices/cart';
+import { useAppSelector } from '@/shared/store/utils';
+import { CartList } from '@/widgets/CartList';
 import classNames from 'classnames';
-import { CartAmount } from '../../../features/cart/CartAmount';
-import { CartList } from '../../../features/cart/CartList';
-import { cartSelectors } from '../../../shared/store/slices/cart';
-import { useAppSelector } from '../../../shared/store/utils';
 import s from './CartPage.module.css';
 
 export const CartPage = () => {

@@ -3,15 +3,17 @@ import { ProductLikeButton } from '@/entities/product/LikeButton';
 import { useAddToCart } from '@/shared/hooks/useAddToCart';
 import { cartSelectors } from '@/shared/store/slices/cart';
 import { useAppSelector } from '@/shared/store/utils';
+import { Button } from '@/shared/ui/Button';
 import { Price } from '@/shared/ui/Price';
 import classNames from 'classnames';
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import s from './Card.module.css';
 
 type CardProps = {
   product: Product;
 };
-export const Card = ({ product }: CardProps) => {
+export const Card = memo(({ product }: CardProps) => {
   const { discount, price, name, tags, id, images } = product;
   const cartProducts = useAppSelector(cartSelectors.getCartProducts);
   const isProductInCart = cartProducts.some((p) => p.id === id);
@@ -41,14 +43,16 @@ export const Card = ({ product }: CardProps) => {
       {isProductInCart ? (
         <CartCounter productId={id} />
       ) : (
-        <button
+        <Button
           onClick={() => addProductToCart({ ...product, count: 1 })}
           disabled={isProductInCart}
           className={classNames(s['card__cart'], s['card__btn'], s['card__btn_type_primary'])}
         >
           В корзину
-        </button>
+        </Button>
       )}
     </article>
   );
-};
+});
+
+Card.displayName = 'Card';

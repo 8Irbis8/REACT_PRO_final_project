@@ -1,17 +1,17 @@
-import { FC } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { Avatar, Box, Container, Link, TextField, Typography } from '@mui/material';
-import LoadingButton from '@mui/lab/LoadingButton';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
+import { useSignUpMutation } from '@/shared/store/api/authApi';
+import { userActions } from '@/shared/store/slices/user';
+import { getMessageFromError } from '@/shared/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { Avatar, Box, Container, Link, TextField, Typography } from '@mui/material';
+import { FC } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { SignUpFormValues } from '../utils/types';
 import { signUpFormSchema } from '../utils/validator';
-import { userActions } from '../../../shared/store/slices/user';
-import { getMessageFromError } from '../../../shared/utils';
-import { useSignUpMutation } from '../../../shared/store/api/authApi';
 
 export const SignUpForm: FC = () => {
   const dispatch = useDispatch();

@@ -7,10 +7,10 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import { useSignInMutation } from '@/shared/store/api/authApi';
+import { userActions } from '@/shared/store/slices/user';
 import { getMessageFromError } from '@/shared/utils';
 import { useDispatch } from 'react-redux';
-import { useSignInMutation } from '../../../shared/store/api/authApi';
-import { userActions } from '../../../shared/store/slices/user';
 import { SignInFormValues } from '../utils/types';
 import { signInFormSchema } from '../utils/validator';
 

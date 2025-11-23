@@ -4,16 +4,16 @@ import { cartActions } from '@shared/store/slices/cart';
 import { Button } from '@shared/ui/Button';
 import { Price } from '@shared/ui/Price';
 import classNames from 'classnames';
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import s from './CartItem.module.css';
 
 type CartItemProps = {
   product: CartProduct;
+  onClick: (productId: string) => void;
 };
 
-export const CartItem = ({ product }: CartItemProps) => {
+export const CartItem = memo(({ product, onClick }: CartItemProps) => {
   const dispatch = useDispatch();
   const { id, name, images, price, discount } = product;
 
@@ -23,8 +23,7 @@ export const CartItem = ({ product }: CartItemProps) => {
 
   const finalPrice = price - discount;
 
-  const productLink = `/products/${id}`;
-
+  const handleTitleClick = useCallback(() => onClick(product.id), [product, onClick]);
   return (
     <div className={classNames(s['cart-item'])}>
       <div className={classNames(s['cart-item__desc'])}>
@@ -32,10 +31,20 @@ export const CartItem = ({ product }: CartItemProps) => {
 
         <div className={classNames(s['cart-item__content'])}>
           <div className={classNames(s['cart-item__row'])}>
-            <Link className={classNames(s['cart-item__title'])} to={productLink}>
-              <h2>{name}</h2>
-            </Link>
-
+            <button
+              onClick={handleTitleClick}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                color: 'inherit',
+                textDecoration: 'underline',
+                cursor: 'pointer',
+                font: 'inherit',
+              }}
+            >
+              {product?.name}
+            </button>
             <div className={classNames(s['cart-item__controls'])}>
               <CartCounter productId={id} />
 
@@ -55,4 +64,6 @@ export const CartItem = ({ product }: CartItemProps) => {
       </div>
     </div>
   );
-};
+});
+
+CartItem.displayName = 'CartItem';

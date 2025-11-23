@@ -1,3 +1,4 @@
+import { Button } from '../Button';
 import s from './SearchInput.module.css';
 
 type SearchProps = {
@@ -18,7 +19,7 @@ export const SearchInput = ({ value, onChange, onClear, placeholder = 'Поис�
         onChange={(e) => onChange(e.target.value)}
       />
       {value.length > 0 && (
-        <button type="button" className={s['search__btn']} onClick={onClear}>
+        <Button type="button" className={s['search__btn']} onClick={onClear}>
           <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path
               fillRule="evenodd"
@@ -32,7 +33,7 @@ export const SearchInput = ({ value, onChange, onClear, placeholder = 'Поис�
               fill="white"
             ></path>
           </svg>
-        </button>
+        </Button>
       )}
     </form>
   );

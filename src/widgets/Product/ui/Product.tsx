@@ -6,11 +6,12 @@ import { useGetProductQuery } from '@/shared/store/api/product';
 import QualitySVG from '@shared/assets/icons/quality.svg?react';
 import TruckSVG from '@shared/assets/icons/truck.svg?react';
 import { ReviewList } from '@widgets/ReviewList/ui/ReviewList';
-import { useLocation } from 'react-router-dom';
 
-export const Product = () => {
-  const location = useLocation();
-  const productId = location.pathname.split('/').at(-1) || '';
+type TProductProps = {
+  productId: string;
+};
+
+export const Product = ({ productId }: TProductProps) => {
   const { data: product } = useGetProductQuery({ id: productId });
 
   if (!product) {
