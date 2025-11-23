@@ -1,18 +1,17 @@
-import { FC } from 'react';
-import { Avatar, Box, Container, Link, TextField, Typography } from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { toast } from 'react-toastify';
+import { Avatar, Box, Container, Link, TextField, Typography } from '@mui/material';
+import { FC } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { useDispatch } from 'react-redux';
-import { SignInFormValues } from '../utils/types';
-import { signInFormSchema } from '../utils/validator';
 import { useSignInMutation } from '../../../shared/store/api/authApi';
 import { userActions } from '../../../shared/store/slices/user';
-import { getMessageFromError } from '../../../shared/utils';
+import { SignInFormValues } from '../utils/types';
+import { signInFormSchema } from '../utils/validator';
 
 export const SignInForm: FC = () => {
   const dispatch = useDispatch();
@@ -40,29 +39,29 @@ export const SignInForm: FC = () => {
   });
 
   const submitHandler: SubmitHandler<SignInFormValues> = async (values) => {
-    try {
-      // метод "unwrap" помогает убрать вспомогательные обертки
-      // RTK, которые обрабатывают ошибки. Теперь ошибки обрабатываем мы
-      // с помощью конструкции try...catch. В этом случае нам так удобней
-      const response = await signInRequestFn(values).unwrap();
+    // try {
+    // метод "unwrap" помогает убрать вспомогательные обертки
+    // RTK, которые обрабатывают ошибки. Теперь ошибки обрабатываем мы
+    // с помощью конструкции try...catch. В этом случае нам так удобней
+    const response = await signInRequestFn(values).unwrap();
 
-      dispatch(userActions.setUser(response.user));
-      dispatch(userActions.setAccessToken({ accessToken: response.accessToken }));
+    dispatch(userActions.setUser(response.user));
+    dispatch(userActions.setAccessToken({ accessToken: response.accessToken }));
 
-      // Выводим уведомление, что пользователь успешно зарегался
-      // Есть куча библиотек для отображения "Тостеров". Мы используем
-      // react-toastify — https://github.com/fkhadra/react-toastify#readme
-      toast.success('Вы успешно авторизованы!');
+    // Выводим уведомление, что пользователь успешно зарегался
+    // Есть куча библиотек для отображения "Тостеров". Мы используем
+    // react-toastify — https://github.com/fkhadra/react-toastify#readme
+    toast.success('Вы успешно авторизованы!');
 
-      if (location.state?.from) {
-        return navigate(location.state.from);
-      }
-
-      navigate('/');
-    } catch (error) {
-      // Если произошла ошибка, то выводим уведомление
-      toast.error(getMessageFromError(error, 'Не известная ошибка при авторизации пользователя'));
+    if (location.state?.from) {
+      return navigate(location.state.from);
     }
+
+    navigate('/');
+    // } catch (error) {
+    //   // Если произошла ошибка, то выводим уведомление
+    //   toast.error(getMessageFromError(error, 'Не известная ошибка при авторизации пользователя'));
+    // }
   };
 
   return (

@@ -1,51 +1,29 @@
 import LikeSvg from '@shared/assets/icons/like.svg?react';
-import {
-  IErrorResponse,
-  useDeleteLikeProductMutation,
-  useSetLikeProductMutation,
-} from '@shared/store/api/productsApi';
-import { userSelectors } from '@shared/store/slices/user';
-import { useAppSelector } from '@shared/store/utils';
 import classNames from 'classnames';
-import { toast } from 'react-toastify';
 import s from './LikeButton.module.css';
 
 type TLikeButtonProps = {
-  product: Product;
+  isActive?: boolean;
+  onClick?: () => void;
+  disabled?: boolean;
+  className?: string;
 };
-export const LikeButton = ({ product }: TLikeButtonProps) => {
-  const accessToken = useAppSelector(userSelectors.getAccessToken);
-  const user = useAppSelector(userSelectors.getUser);
 
-  const [setLike] = useSetLikeProductMutation();
-  const [deleteLike] = useDeleteLikeProductMutation();
-
-  const isLike = product?.likes.some((l) => l.userId === user?.id);
-
-  const toggleLike = async () => {
-    if (!accessToken) {
-      toast.warning('Вы не авторизованы');
-      return;
-    }
-    let response;
-    if (isLike) {
-      response = await deleteLike({ id: `${product.id}` });
-    } else {
-      response = await setLike({ id: `${product.id}` });
-    }
-
-    if (response.error) {
-      const error = response.error as IErrorResponse;
-      toast.error(error.data.message);
-    }
-  };
-
+export const LikeButton = ({
+  isActive = false,
+  onClick,
+  disabled = false,
+  className,
+}: TLikeButtonProps) => {
   return (
     <button
-      className={classNames(s['card__favorite'], {
-        [s['card__favorite_is-active']]: isLike,
+      className={classNames(s['card__favorite'], className, {
+        [s['card__favorite_is-active']]: isActive,
+        [s['card__favorite_disabled']]: disabled,
       })}
-      onClick={toggleLike}
+      onClick={onClick}
+      disabled={disabled}
+      type="button"
     >
       <LikeSvg />
     </button>

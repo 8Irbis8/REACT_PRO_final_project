@@ -45,8 +45,8 @@
 
 ## Webpack
 
--- build time
--- output-size
+-- build time 18.34s
+-- output-size 663Kb
 
 ## Vite + SWC
 
