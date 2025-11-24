@@ -54,9 +54,8 @@ export const SignInForm: FC = () => {
         // Есть куча библиотек для отображения "Тостеров". Мы используем
         // react-toastify — https://github.com/fkhadra/react-toastify#readme
         toast.success('Вы успешно авторизованы!');
-
         if (location.state?.from) {
-          return navigate(location.state.from);
+          return navigate(location.state?.from);
         }
 
         navigate('/');
@@ -65,7 +64,7 @@ export const SignInForm: FC = () => {
         toast.error(getMessageFromError(error, 'Не известная ошибка при авторизации пользователя'));
       }
     },
-    [dispatch, location.state.from, navigate, signInRequestFn],
+    [dispatch, location, navigate, signInRequestFn],
   );
 
   return (

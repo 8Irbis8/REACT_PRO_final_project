@@ -1,4 +1,4 @@
-import { InfiniteScroll } from '@/features/infinite-scroll/ui/InfiniteScroll';
+import { InfiniteScroll } from '@/features/product-infinite-scroll/ui/InfiniteScroll';
 import { WithProtection } from '@/shared/store/HOCs/WithProtection';
 import { WithQuery } from '@/shared/store/HOCs/WithQuery';
 import { useProducts } from '@/shared/store/hooks/useProducts';

@@ -1,5 +1,5 @@
 import { CartItem } from '@/features/cart/CartItem';
-import { Modal } from '@/shared/modal';
+import { Modal } from '@/shared/ui/Modal';
 import { Product } from '@/widgets/Product';
 import classNames from 'classnames';
 import { memo, useCallback, useState } from 'react';

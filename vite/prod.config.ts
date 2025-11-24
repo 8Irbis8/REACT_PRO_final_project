@@ -1,8 +1,6 @@
-// Production специфичные настройки
 export const productionConfig = {
   build: {
     minify: 'esbuild',
-    sourcemap: 'hidden',
     rollupOptions: {
       output: {
         manualChunks: {

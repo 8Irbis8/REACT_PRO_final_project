@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { Button } from '../Button';
 import s from './SearchInput.module.css';
 
@@ -9,6 +10,11 @@ type SearchProps = {
 };
 
 export const SearchInput = ({ value, onChange, onClear, placeholder = 'Поиск' }: SearchProps) => {
+  const onHandleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value ?? ''),
+    [onChange],
+  );
+
   return (
     <form className={s['search']}>
       <input
@@ -16,7 +22,7 @@ export const SearchInput = ({ value, onChange, onClear, placeholder = 'Поис�
         className={s['search__input']}
         placeholder={placeholder}
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={onHandleChange}
       />
       {value.length > 0 && (
         <Button type="button" className={s['search__btn']} onClick={onClear}>

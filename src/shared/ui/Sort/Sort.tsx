@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useCallback, useMemo } from 'react';
 
 type SortOption = {
   title: string;
@@ -12,17 +12,26 @@ type SortProps = {
 };
 
 export const Sort = ({ value, options, onChange }: SortProps) => {
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    onChange(e.target.value);
-  };
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLSelectElement>) => {
+      onChange(e.target.value);
+    },
+    [onChange],
+  );
 
-  return (
-    <select value={value} onChange={handleChange}>
-      {options.map((option) => (
+  const memoOptions = useMemo(
+    () =>
+      options.map((option) => (
         <option key={option.value} value={option.value}>
           {option.title}
         </option>
-      ))}
+      )),
+    [options],
+  );
+
+  return (
+    <select value={value} onChange={handleChange}>
+      {memoOptions}
     </select>
   );
 };

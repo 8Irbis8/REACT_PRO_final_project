@@ -1,5 +1,6 @@
 import { Rating } from '@shared/ui/Rating';
 import classNames from 'classnames';
+import { memo } from 'react';
 import s from './Header.module.css';
 
 type ProductHeaderProps = {
@@ -7,7 +8,7 @@ type ProductHeaderProps = {
   rating: number;
 };
 
-export const ProductHeader = ({ name, rating }: ProductHeaderProps) => (
+export const ProductHeader = memo(({ name, rating }: ProductHeaderProps) => (
   <>
     <h1 className={classNames(s['header-title'])}>{name}</h1>
     <p className="acticul">
@@ -15,4 +16,6 @@ export const ProductHeader = ({ name, rating }: ProductHeaderProps) => (
     </p>
     <Rating rating={rating} />
   </>
-);
+));
+
+ProductHeader.displayName = 'Header';

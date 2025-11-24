@@ -6,7 +6,7 @@ import { useAppSelector } from '@/shared/store/utils';
 import { Logo } from '@/shared/ui/Logo';
 import { isLiked } from '@/shared/utils';
 import classNames from 'classnames';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import s from './Header.module.css';
 
@@ -15,7 +15,10 @@ export const Header = memo(() => {
   const user = useAppSelector(userSelectors.getUser);
   const cartProducts = useAppSelector(cartSelectors.getCartProducts);
 
-  const likeCount = products.filter((product: Product) => isLiked(product.likes, user?.id)).length;
+  const likeCount = useMemo(
+    () => products.filter((product: Product) => isLiked(product.likes, user?.id)).length,
+    [products, user?.id],
+  );
 
   const accessToken = useAppSelector(userSelectors.getAccessToken);
 

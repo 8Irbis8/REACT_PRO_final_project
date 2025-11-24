@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { isLiked } from '../../utils';
 import { useGetProductsQuery } from '../api/product';
@@ -18,13 +19,13 @@ export const useProducts = () => {
     perPage: isFavoritesPage ? undefined : perPage,
   });
 
-  let products = data?.products || [];
-
   const user = useAppSelector(userSelectors.getUser);
-
-  if (isFavoritesPage) {
-    products = products.filter((product) => isLiked(product.likes, user?.id));
-  }
+  const products = useMemo(() => {
+    const productData = data?.products || [];
+    if (isFavoritesPage) {
+      return productData.filter((product) => isLiked(product.likes, user?.id));
+    } else return productData;
+  }, [isFavoritesPage, data?.products, user?.id]);
 
   const productsCount = data?.length || 0;
 

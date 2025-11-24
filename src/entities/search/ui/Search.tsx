@@ -1,12 +1,13 @@
 import { SearchInput } from '@/shared/ui/SearchInput/SearchInput';
+import { useCallback } from 'react';
 import { useProductsSearchForm } from '../model/hooks/useProductSearchForm';
 
 export const Search = () => {
   const { searchValue, setSearchValue } = useProductsSearchForm();
 
-  const handleClearSearch = () => {
+  const handleClearSearch = useCallback(() => {
     setSearchValue('');
-  };
+  }, [setSearchValue]);
 
   return (
     <SearchInput

@@ -1,15 +1,16 @@
 import { Rating } from '@/shared/ui/Rating';
 import classNames from 'classnames';
+import { memo, useMemo } from 'react';
 import { ReviewForm } from './ReviewForm/ReviewForm';
 import s from './ReviewList.module.css';
 
 type ReviewListProps = {
   product: Product;
 };
-export const ReviewList = ({ product }: ReviewListProps) => {
-  return (
-    <div className={classNames(s['product__reviews'])}>
-      {product.reviews.map((review) => (
+export const ReviewList = memo(({ product }: ReviewListProps) => {
+  const reviews = useMemo(
+    () =>
+      product.reviews.map((review) => (
         <div className={s['review']} key={review.id}>
           <div className={s['review__header']}>
             <div className={s['review__name']}>{review.user.name}</div>
@@ -20,10 +21,17 @@ export const ReviewList = ({ product }: ReviewListProps) => {
           <Rating rating={review.rating} />
           <p className={s['review__text']}>{review.text}</p>
         </div>
-      ))}
+      )),
+    [product?.reviews],
+  );
+
+  return (
+    <div className={classNames(s['product__reviews'])}>
+      {reviews}
 
       <h2>Отзыв о товаре {product.name}</h2>
       <ReviewForm />
     </div>
   );
-};
+});
+ReviewList.displayName = 'ReviewList';

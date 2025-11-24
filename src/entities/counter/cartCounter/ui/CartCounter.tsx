@@ -1,11 +1,12 @@
 import { Counter } from '@/shared/ui/Counter';
+import { memo } from 'react';
 import { useCartCount } from '../model/hooks/useCount';
 
 type CartCounterProps = {
   productId: string;
 };
 
-export const CartCounter = ({ productId }: CartCounterProps) => {
+export const CartCounter = memo(({ productId }: CartCounterProps) => {
   const { count, stock, handleSetCount, handleIncrement, handleDecrement } =
     useCartCount(productId);
 
@@ -18,4 +19,6 @@ export const CartCounter = ({ productId }: CartCounterProps) => {
       plusDisabled={count >= stock}
     />
   );
-};
+});
+
+CartCounter.displayName = 'CartCounter';
